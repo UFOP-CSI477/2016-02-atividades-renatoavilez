@@ -105,7 +105,7 @@ class ProdutoController extends Controller
 
         $produto->save();
 
-        Session::flash('success', 'O produto foi atualizado!');
+        //Session::flash('success', 'O produto foi atualizado!');
 
         return redirect()->route('produtos.show', $produto->id);
     }

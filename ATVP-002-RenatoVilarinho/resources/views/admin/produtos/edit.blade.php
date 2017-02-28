@@ -16,24 +16,23 @@
             <!-- /.box-header -->
 
             <!-- form start -->
-            <form  method="POST" action="{{ route('produtos.update', 3) }}">
+            <form  method="POST" action="{{ route('produtos.update', $produto->id) }}">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
                 <div class="box-body">
                     <div class="form-group">
                         <label name="nome">Nome:</label>
-                        <input id="nome" name="nome" class="form-control">
                         <textarea type="text" class="form-control" id="nome" name="nome" rows="1" style="resize:none;">{{ $produto->nome }}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label name="preco">Preco(R$):</label>
-                        <input id="preco" name="preco" class="form-control" placeholder="R$ 0,00">
+                        <textarea type="text" class="form-control" id="preco" name="preco" rows="1" style="resize:none;">{{ $produto->preco }}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="imagem">Imagem</label>
-                        <input id="imagem" name="imagem" class="form-control">
+                        <textarea type="text" class="form-control" id="imagem" name="imagem" rows="1" style="resize:none;">{{ $produto->imagem }}</textarea>
                         {{-- <input type="file" id="imagem"> --}}
                     </div>
 
