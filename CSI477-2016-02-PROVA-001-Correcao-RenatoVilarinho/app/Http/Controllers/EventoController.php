@@ -15,7 +15,7 @@ class EventoController extends Controller
     public function index()
     {
         $eventos = Evento::all();
-        return view('eventos.index')->with('eventos', $eventos);
+        return view('admin.eventos')->with('eventos', $eventos);
     }
 
     /**
@@ -37,7 +37,7 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(
-            'nome' => 'required|max:20',
+            'nome' => 'required|max:60',
             'preco' => 'required',
             'data' => 'required'
         ));

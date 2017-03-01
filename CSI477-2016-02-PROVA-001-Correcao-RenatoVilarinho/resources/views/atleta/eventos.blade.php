@@ -7,11 +7,11 @@
     <div class="row">
 
         <div class="col-md-10">
-            <h1>Inscrições</h1>
+            <h1>Suas inscrições</h1>
         </div>
 
         <div class="col-md-2">
-            <button type="button" class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#ModalNovoRegistro">Inscrever</button>
+            <button type="button" class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#ModalNovoRegistro">Inscreva-se</button>
         </div>
     </div>
 
@@ -20,7 +20,6 @@
             <table class="table">
                 <thead>
                     <th>#</th>
-                    <th>Atleta</th>
                     <th>Evento</th>
                     <th>Data</th>
                     <th>Pago</th>
@@ -31,13 +30,8 @@
 
                         <tr>
                             <td>{{ $registro->id }}</td>
-
-                            <td>{{ $registro->atleta->name }}</td>
-
                             <td>{{ $registro->evento->nome }}</td>
-
                             <td>{{ $registro->data }}</td>
-
                             <td>{{ ($registro->pago) ? 'Pago' : 'Pendente' }} </td>
                         </tr>
 
@@ -61,6 +55,7 @@
                 <form method="POST" action="{{ route('registros.store') }}">
                     <div class="modal-body">                                     
                         <div class="form-group">
+                            <label name="data">Evento</label>
                             <select class="form-control" name="evento_id">
                                 @foreach($eventos as $evento)                               
                                     <option value='{{ $evento->id }}'>{{ $evento->nome }}</option>
@@ -91,7 +86,7 @@
 
                 <div class="modal-footer">
                     <span class="pull-right">
-                        <input type="submit" value="Criar Registro" class="btn btn-success">
+                        <input type="submit" value="Concluir" class="btn btn-success">
                         <input type="hidden" name="atleta_id" value="{{ Auth::id() }}">
                         <input type="hidden" name="_token" value="{{ Session::token() }}">              
                         <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>                               

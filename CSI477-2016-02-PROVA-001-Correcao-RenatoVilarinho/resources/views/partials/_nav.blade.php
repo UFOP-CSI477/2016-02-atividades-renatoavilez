@@ -10,11 +10,20 @@
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
-             <ul class="nav navbar-nav">
-                <li class="{{ Request::is('evento') ? "active" : "" }}"><a href="eventos.index">Eventos</a></li>
-           </ul>
 
-
+            @if(!Auth::check())           
+                <ul class="nav navbar-nav navbar-right">   
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Admin Area<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ route ('registros.index')}}">Inscrições</a></li>
+                                <li><a href="{{ route ('eventos.index')}}">Eventos</a></li>
+                                <li><a href="{{ route ('atletas.index')}}">Atletas</a></li>
+                            </ul>
+                    </li>
+                </ul>
+            @endif
+    
             <ul class="nav navbar-nav navbar-right">   
                 @if(Auth::check())   
                 {{-- Confere se um usuario esta logado  --}}
@@ -23,9 +32,6 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route ('registros.index')}}">Registros</a></li>
-                            {{-- <li><a href="{{ route ('produtos.index') }}">Produtos</a></li>
-                            <li><a href="{{ route ('categoriaProdutos.index')}}">Categorias de Produtos</a></li>
-                            <li><a href="{{ route ('categoriaPrecos.index')}}">Categorias de Preços</a></li> --}}
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>             
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST">

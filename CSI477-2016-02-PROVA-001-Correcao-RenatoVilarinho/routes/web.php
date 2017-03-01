@@ -11,14 +11,18 @@
 |
 */
 
+
+
 Route::get('/', function () {
-    return view('welcome');
+    $eventos = \App\Evento::orderBy('data', 'asc')->get();
+    return view('welcome')->with('eventos', $eventos);
 });
 
 
 Route::resource('eventos','EventoController');
 Route::resource('registros','RegistroController');
 
+Route::get('atletas','AtletaController@index')->name('atletas.index');
 
 Auth::routes();
 

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Registro;
+use App\Evento;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -22,7 +25,10 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('home');
+    {   
+        $eventos = Evento::all();
+        $registros = Registro::all()->where('atleta_id','=', Auth::id());          
+            
+        return view('atleta.eventos')->with('registros', $registros)->with('eventos', $eventos);
     }
 }

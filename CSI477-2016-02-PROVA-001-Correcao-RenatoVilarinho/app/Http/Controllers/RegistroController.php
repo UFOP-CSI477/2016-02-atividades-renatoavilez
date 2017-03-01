@@ -8,6 +8,7 @@ use App\Evento;
 use App\user;
 use Session;
 use Auth;
+use DB;
 
 class RegistroController extends Controller
 {
@@ -22,15 +23,17 @@ class RegistroController extends Controller
 
         if(Auth::check()){
             $registros = Registro::all()->where('atleta_id','=', Auth::id());          
-            return view('atleta.index')->with('registros', $registros)->with('eventos', $eventos);
+            
+            return view('atleta.eventos')->with('registros', $registros)->with('eventos', $eventos);
             }
         
         else{
-            $registros = Registro::all();
-            return view('registros.index')->with('registros', $registros)->with('eventos', $eventos);
+            $registros = Registro::orderBy('data', 'desc')->get();
+
+            return view('admin.registros')->with('registros', $registros)->with('eventos', $eventos);
         }
 
-        //acredito que o mais correto seria utilando middlewares
+        //acredito que o mais correto seria utilizando middlewares
     }
 
     /**
