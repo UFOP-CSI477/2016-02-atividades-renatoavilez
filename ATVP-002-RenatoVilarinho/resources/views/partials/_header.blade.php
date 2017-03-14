@@ -1,51 +1,50 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
+    <a href="{{ url('/') }}" class="logo">
       <span class="logo-mini"><b>PS</b></span>
-      <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>PetShop</b>DuBodi</span>
     </a>
 
-    <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Reduzir Menu</span>
       </a>
-      <!-- Navbar Right Menu -->
+
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              123
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-body">
-                <p>
-                  132
-                  <small>Membro desde 123</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
+
+          @if(Auth::check())
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+              </a>
+
+              <ul class="dropdown-menu">
+                <li class="user-body">
+                  <p>
+                    {{ Auth::user()->name }}
+                    <small>Membro desde {{ Auth::user()->created_at }}</small>
+                  </p>
+                </li>
+
+                <li class="user-footer">
+                  <div class="pull-right">
+                    <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                  </div>
+                </li>
+              </ul>
+            </li>
+
+          @else
+            <li class=""><a href="{{ route('login')}}">Login</a></li>
+            <li class=""><a href="{{ route('register')}}">Cadastre-se</a></li>
+          @endif
 
         </ul>
       </div>
-
     </nav>
-
-   </header>
+</header>

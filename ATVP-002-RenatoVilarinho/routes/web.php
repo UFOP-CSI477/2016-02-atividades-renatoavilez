@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $produtos = \App\Produto::All();
+    return view('guest.welcome')->with('produtos',$produtos);
 });
 
 Auth::routes();

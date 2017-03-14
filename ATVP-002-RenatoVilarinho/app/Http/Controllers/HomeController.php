@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Produto;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin/main');
+        $tipousuario = User::tipo();
+
+        if($tipousuario == 1){
+            $produtos = Produto::all();
+            return view('cliente.main')->with('produtos', $produtos);
+        }
+
+        else{
+            $produtos = Produto::all();
+            return view('admin.main')->with('produtos', $produtos);
+        }        
     }
 }

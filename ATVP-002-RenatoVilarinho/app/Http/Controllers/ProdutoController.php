@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Produto;
+use App\User;
 
 class ProdutoController extends Controller
 {
@@ -14,11 +15,16 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //Cria uma variável para armazenar todos os produtos <---- Considerar usar lazyload para carregar a medida que desce a página
+        $tipousuario = User::tipo();
         $produtos = Produto::all();
-        //$produtos = Produto::paginate(10);
 
-        return view('admin.produtos.index')->with('produtos', $produtos);
+        if($tipousuario == 2 || $tipousuario == 3){
+            return view('admin.produtos.index')->with('produtos', $produtos);
+        }
+
+        else{
+            return view('cliente.produtos.index')->with('produtos', $produtos);
+        }
     }
 
     /**
@@ -55,7 +61,7 @@ class ProdutoController extends Controller
 
         //Session::flash('success', 'Novo produto cadastrado!');
 
-        return redirect()->route('produtos.show', $produto->id);
+        return redirect()->route('admin.produto.show', $produto->id);
     }
 
     /**
@@ -65,9 +71,17 @@ class ProdutoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
         $produto = Produto::find($id);
-        return view('admin.produtos.show')->with('produto', $produto);
+        $tipousuario = User::tipo();
+
+        if($tipousuario == 0 || $tipousuario == 1){
+            return view('produtos.show')->with('produto', $produto);
+        }
+
+        else{
+            return view('admin.produtos.show')->with('produto', $produto);
+        } 
     }
 
     /**
@@ -107,7 +121,7 @@ class ProdutoController extends Controller
 
         //Session::flash('success', 'O produto foi atualizado!');
 
-        return redirect()->route('produtos.show', $produto->id);
+        return redirect()->route('admin.produtos.show', $produto->id);
     }
 
     /**

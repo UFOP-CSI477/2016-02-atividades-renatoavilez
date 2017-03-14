@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -29,5 +30,16 @@ class User extends Authenticatable
 
     public function compras(){
         return $this->hasMany('App\Compra');
+    }
+
+    public static function tipo(){
+        
+        if(Auth::check()){
+            return Auth::user()->type;
+            }
+        
+        else{
+            return 0;
+        }
     }
 }

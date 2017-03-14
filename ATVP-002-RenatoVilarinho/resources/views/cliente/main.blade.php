@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-    @include('partials/_head')
+    @include('partials._head')
 
     <body class="hold-transition skin-green sidebar-mini">
 
         <div class="wrapper">
     
-            @include('partials/_header')
+            @include('partials._header')
     
             <!-- Left side column. contains the logo and sidebar -->
-            {{-- @include('partials/_menuesquerdo') --}}
+            @include('cliente.partials._menuesquerdo')
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -33,10 +33,10 @@
             </div>                                                                
   <!-- /.content-wrapper -->
 
-            @include('partials/_footer')
+            @include('partials._footer')
         </div>
 <!-- ./wrapper -->
-        @include('partials/_javascript')
+        @include('partials._javascript')
         @yield('scriptLocal')
     </body>
 </html>
