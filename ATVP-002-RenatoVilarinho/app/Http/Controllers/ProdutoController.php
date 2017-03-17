@@ -23,7 +23,7 @@ class ProdutoController extends Controller
         }
 
         else{
-            return view('cliente.produtos.index')->with('produtos', $produtos);
+            return view('cliente.index')->with('produtos', $produtos);
         }
     }
 

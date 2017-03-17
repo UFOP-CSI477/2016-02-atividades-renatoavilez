@@ -26,14 +26,13 @@ class HomeController extends Controller
     public function index()
     {
         $tipousuario = User::tipo();
+        $produtos = Produto::all();
 
         if($tipousuario == 1){
-            $produtos = Produto::all();
-            return view('cliente.main')->with('produtos', $produtos);
+            return view('cliente.index')->with('produtos', $produtos);
         }
 
         else{
-            $produtos = Produto::all();
             return view('admin.main')->with('produtos', $produtos);
         }        
     }
