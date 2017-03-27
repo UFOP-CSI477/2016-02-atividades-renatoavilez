@@ -11,7 +11,7 @@
         <div class="col-md-3">
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="{{ $produto->imagem }}" alt="iMAGEM DO PRODUTO">
+                    {{-- <img class="profile-user-img img-responsive img-circle" src="{{ $produto->imagem }}" alt="iMAGEM DO PRODUTO"> --}}
 
                     <h3 class="profile-username text-center">{{ $produto->nome }}</h3>
 
@@ -46,7 +46,7 @@
                     </div> --}}
 
                     <div class="row">
-                        <form  method="POST" action="{{ route('carrinho.store') }}">
+                        {{-- <form  method="POST" action="{{ route('carrinho.store') }}"> --}}
                             <div class="col-md-12">        
                                 <ul class="list-group list-group-unbordered">
                                     <li class="list-group-item">
@@ -63,9 +63,10 @@
                                     <input type="hidden" name="produto_id" value="{{ $produto->id }}">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
                                     <input type="submit" value="Adicionar ao Carrinho" class="btn btn-block btn-bg-primary btn-primary">
+                                    <a href="{{ route('produto.addCarrinho', ['id' => $produto->id]) }}" role="button" class="btn btn-block btn-bg-primary btn-primary">CARRRINHO</a>
                                 </div>
                             </div>
-                        </form>
+                        {{-- </form> --}}
                     </div>
 
                     <div class="row">

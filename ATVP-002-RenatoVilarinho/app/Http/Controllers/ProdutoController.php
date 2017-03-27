@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Carrinho;
 use App\Produto;
 use App\User;
+use Session;
 
 class ProdutoController extends Controller
 {
@@ -134,4 +136,33 @@ class ProdutoController extends Controller
     {
         //
     }
+
+    public function getAddCarrinho(Request $request, $id)
+        {
+        $produto = Produto::find($id);
+
+        $carrinhoVelho = Session::has('carrinho') ? $request->session()->get('carrinho'):null;
+        $carrinho = new Carrinho($carrinhoVelho);
+        $carrinho->add($produto, $produto->id);
+
+        //Session::put('carrinho', $carrinho);
+        $request->session()->put('carrinho', $carrinho);
+        //dd($request->session()->get('carrinho'));
+        //return redirect()->route('produto.indexCarrinho');
+        return redirect()->route('produtos.index');
+        //return view('cliente.carrinho');
+
+    }
+
+    public function getCarrinho(){
+        if (!Session::has('carrinho')){
+            return view('cliente.compra');
+        }
+
+        $carrinhoVelho = Session::get('carrinho');
+        $carrinho = new Carrinho($carrinhoVelho);
+        //return view('cliente.carrinho')->with('produtos', $carrinho->itens);//->with('totalPreco' , $carrinho->totalPreco);
+        return view ('cliente.carrinho', ['produtos' => $carrinho->itens, 'totalPreco' => $carrinho->totalPreco]);
+    }   
+
 }

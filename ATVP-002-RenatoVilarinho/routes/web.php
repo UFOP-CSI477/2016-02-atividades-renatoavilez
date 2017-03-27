@@ -16,6 +16,16 @@ Route::get('/', function () {
     return view('guest.welcome')->with('produtos',$produtos);
 });
 
+Route::get('add-carrinho/{id}', [
+    'uses' => 'ProdutoController@getAddCarrinho',
+    'as' => 'produto.addCarrinho'
+]);
+
+Route::get('carrinho', [
+    'uses' => 'ProdutoController@getCarrinho',
+    'as' => 'produto.indexCarrinho'
+]);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -24,4 +34,4 @@ Route::resource('produtos','ProdutoController');
 
 Route::resource('compras','CompraController');
 
-Route::resource('carrinho','CarrinhoController');
+//Route::resource('carrinho','CarrinhoController');
