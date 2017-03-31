@@ -1,0 +1,28 @@
+- Controller do Produto
+    - Não edita
+        - Erro na view: Não mostra os SELECT
+        - Não envia os atributos que não foram alterados
+    
+    - Não apaga
+        - Não implementado
+
+- Categoria Precos
+    - Não edita
+    - Não exclui
+
+- Categoria Produtos
+    - Não edita
+    - Não exclui
+
+
+
+- IMPORTANTE
+    - foi preciso alterar o php.ini de acordo com o link
+    http://stackoverflow.com/questions/30405960/laravel-5-validating-mime-types
+    para saber qual php.ini esta sendo utilizado, exibir {{phpinfo()}} em qualquer view
+
+
+    if(Auth::user()->type == 1){
+            }
+
+        return view('acessoNegado');

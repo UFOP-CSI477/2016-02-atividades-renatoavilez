@@ -50,7 +50,7 @@ class ProdutoController extends Controller
         $this->validate($request, array(
             'nome' => 'required|max:255',
             'preco' => 'required',
-            'imagem' => 'required',
+            //'imagem' => 'required',
         ));
 
         $produto = new Produto;
@@ -78,11 +78,11 @@ class ProdutoController extends Controller
         $tipousuario = User::tipo();
 
         if($tipousuario == 0 || $tipousuario == 1){
-            return view('produtos.show')->with('produto', $produto);
+            return view('produto.show')->with('produto', $produto);
         }
 
         else{
-            return view('admin.produtos.show')->with('produto', $produto);
+            return view('admin.produto.show')->with('produto', $produto);
         } 
     }
 
@@ -137,11 +137,16 @@ class ProdutoController extends Controller
         //
     }
 
+    public function indexCarrinho(){
+        $produtos = Produto::All();
+        return view('cliente.carrinho')->with('produtos', $produtos);
+    }
+
     public function getAddCarrinho(Request $request, $id)
         {
         $produto = Produto::find($id);
 
-        $carrinhoVelho = Session::has('carrinho') ? $request->session()->get('carrinho'):null;
+        $carrinhoVelho = Session::has('carrinho') ? Session::get('carrinho'):null;
         $carrinho = new Carrinho($carrinhoVelho);
         $carrinho->add($produto, $produto->id);
 
@@ -149,7 +154,7 @@ class ProdutoController extends Controller
         $request->session()->put('carrinho', $carrinho);
         //dd($request->session()->get('carrinho'));
         //return redirect()->route('produto.indexCarrinho');
-        return redirect()->route('produtos.index');
+        return redirect()->route('produto.indexCarrinho');
         //return view('cliente.carrinho');
 
     }

@@ -65,7 +65,7 @@
 
 
 
-@section('content')
+
     {{-- @foreach($produtos as $productChunk) --}}
         <div class="row">
             @foreach($produtos as $produto)
@@ -73,10 +73,10 @@
                     <div class="thumbnail">
                         {{-- <img src="{{ $produto->imagePath }}" alt="..." class="img-responsive"> --}}
                         <div class="caption">
-                            <h3>{{ $produto['item']['nome'] }}</h3>
-                            {{-- <p class="description">{{ $produto->description }}</p> --}}
+                            <h3>{{ $produto->nome }}</h3>
+                            <p class="description">{{ $produto->preco }}</p>
                             <div class="clearfix">
-                                <div class="pull-left price">${{ $produto->rpeco }}</div>
+                                <div class="pull-left price">${{ $produto->preco }}</div>
                                 <a href="{{ route('produto.addCarrinho', ['id' => $produto->id]) }}" class="btn btn-success pull-right" role="button">Add to Cart</a>
                             </div>
                         </div>
